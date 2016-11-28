@@ -28,7 +28,6 @@ public class MainActivity extends Activity {
 
         @Override
         public void onDataChanged(String className) {
-            super.onDataChanged(className);
             System.out.println(TAG + className);
 
             System.out.println(TAG + Looper.getMainLooper().getThread().getName());

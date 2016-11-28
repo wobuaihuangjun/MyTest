@@ -28,8 +28,6 @@ public class TestHandlerActivity extends Activity {
 
         @Override
         public void onDataChanged(String className) {
-            super.onDataChanged(className);
-
             textView.setText(className);
         }
     };
