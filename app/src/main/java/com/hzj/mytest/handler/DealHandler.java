@@ -96,8 +96,21 @@ public class DealHandler {
     }
 
     private void sendDataUpdateHandler() {
-        dataUpdateHandler.sendEmptyMessageDelayed(MyHandler.HANDLER_DISPATCH_UPDATE,
-                MyHandler.INTERVAL_UPDATE_TIME);
+        if (dataUpdateHandler == null) {
+            initHandle();
+        } else {
+            dataUpdateHandler.sendEmptyMessageDelayed(MyHandler.HANDLER_DISPATCH_UPDATE,
+                    MyHandler.INTERVAL_UPDATE_TIME);
+        }
+    }
+
+    private void initHandle() {
+        uiHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                dataUpdateHandler = new MyHandler(DealHandler.this);
+            }
+        });
     }
 
     private void notifyDataChanged(final String className) {
