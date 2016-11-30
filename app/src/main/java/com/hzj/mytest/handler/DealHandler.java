@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class DealHandler {
 
-    private static final String TAG = "DealHandler：";
+    private static final String TAG = "DealHandler-hzjdemo：";
 
     private Handler uiHandler;
     private Handler asyncHandler;
@@ -35,7 +35,6 @@ public class DealHandler {
         listeners = new ArrayList<>();
 
         updateRequest = new ArrayList<>();
-        dataUpdateHandler = new MyHandler(this);
     }
 
     public static synchronized DealHandler getInstance() {
@@ -69,33 +68,36 @@ public class DealHandler {
 
     public synchronized void publish(Object data) {
         String className = (String) data;
-
-        if (!updateRequest.contains(className)) {
-            System.out.println(TAG + "publish：" + className);
-            updateRequest.add(className);
-        } else {
-            System.out.println(TAG + "publish：" + className + " is contains");
+        if (updateRequest.contains(className)) {
+            return;
         }
 
-        if (updateRequest.size() == 1) {
-            sendDataUpdateHandler();
-        }
+        updateRequest.add(className);
 
+        if (!isStartHandler) {
+            System.out.println(TAG + "start handler");
+            dispatchDataUpdate();
+        }
     }
 
+    private volatile boolean isStartHandler = false;
+
     synchronized void dispatchDataUpdate() {
-        if (updateRequest.size() > 0) {
-            String className = updateRequest.remove(0);
-
-            System.out.println(TAG + "dispatchDataUpdate：" + className);
-
-            notifyDataChanged(className);
-
+        int size = updateRequest.size();
+        System.out.println(TAG + "size = " + size);
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                notifyDataChanged(updateRequest.remove(0));
+            }
             sendDataUpdateHandler();
+        } else {
+            isStartHandler = false;
+            System.out.println(TAG + "stop handler");
         }
     }
 
     private void sendDataUpdateHandler() {
+        isStartHandler = true;
         if (dataUpdateHandler == null) {
             initHandle();
         } else {
@@ -109,6 +111,8 @@ public class DealHandler {
             @Override
             public void run() {
                 dataUpdateHandler = new MyHandler(DealHandler.this);
+                dataUpdateHandler.sendEmptyMessageDelayed(MyHandler.HANDLER_DISPATCH_UPDATE,
+                        MyHandler.INTERVAL_UPDATE_TIME);
             }
         });
     }

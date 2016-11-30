@@ -12,14 +12,19 @@ import com.hzj.mytest.handler.TestHandlerActivity;
 
 public class MainActivity extends Activity {
 
-    private static final String TAG = "MainActivity：";
+    private static final String TAG = "MainActivity-hzjdemo：";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DealHandler.getInstance().register(listener, DataUpdateThreadMode.BackgroundThread);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DealHandler.getInstance().register(listener, DataUpdateThreadMode.BackgroundThread);
+            }
+        }).start();
 
         startActivity(new Intent(this, TestHandlerActivity.class));
     }
@@ -29,8 +34,6 @@ public class MainActivity extends Activity {
         @Override
         public void onDataChanged(String className) {
             System.out.println(TAG + className);
-
-            System.out.println(TAG + Looper.getMainLooper().getThread().getName());
         }
     };
 

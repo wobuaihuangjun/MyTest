@@ -17,7 +17,7 @@ public class MyHandler extends Handler {
     /**
      * 更新间隔时间
      */
-    static final int INTERVAL_UPDATE_TIME = 500;
+    static final int INTERVAL_UPDATE_TIME = 5000;
 
     static final int HANDLER_DISPATCH_UPDATE = 1;
 
