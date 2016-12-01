@@ -5,4 +5,19 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="list_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+    </style>
+
+    <style name="LabelButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:background">@color/color_black</item>
+        <item name="android:textSize">@dimen/dimen_text_size_20</item>
+        <item name="android:layout_marginTop">@dimen/dimen_label_gap_20</item>
+    </style>
 </resources>
