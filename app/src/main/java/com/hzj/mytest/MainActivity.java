@@ -13,6 +13,7 @@ import com.hzj.mytest.handler.DataUpdateThreadMode;
 import com.hzj.mytest.handler.DealHandler;
 import com.hzj.mytest.handler.TestHandlerActivity;
 import com.hzj.mytest.rxjava.TestRxjavaActivity;
+import com.hzj.mytest.view.TestViewActivity;
 
 public class MainActivity extends Activity {
 
@@ -21,6 +22,7 @@ public class MainActivity extends Activity {
     private static final DemoInfo[] DEMOS = {
             new DemoInfo(R.string.test_handler, TestHandlerActivity.class),
             new DemoInfo(R.string.test_rxjava, TestRxjavaActivity.class),
+            new DemoInfo(R.string.test_view, TestViewActivity.class),
     };
 
     @Override

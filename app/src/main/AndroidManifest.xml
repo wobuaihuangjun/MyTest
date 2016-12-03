@@ -19,6 +19,7 @@
 
         <activity android:name=".handler.TestHandlerActivity" />
         <activity android:name=".rxjava.TestRxjavaActivity" />
+        <activity android:name=".view.TestViewActivity"/>
     </application>
 
 </manifest>

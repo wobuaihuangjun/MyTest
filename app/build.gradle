@@ -27,6 +27,8 @@ ext {
     rxjavaVersion = "1.1.10"
 
     butterknifeVersion = "7.0.1"
+
+    eventbusVersion = "2.4.0"
 }
 
 dependencies {
@@ -41,4 +43,6 @@ dependencies {
     compile "io.reactivex:rxjava:$rxjavaVersion"
 
     compile "com.jakewharton:butterknife:$butterknifeVersion"
+
+    compile "de.greenrobot:eventbus:$eventbusVersion"
 }
