@@ -18,8 +18,12 @@
         </activity>
 
         <activity android:name=".handler.TestHandlerActivity" />
+
         <activity android:name=".rxjava.TestRxjavaActivity" />
+
         <activity android:name=".view.TestViewActivity"/>
+        <activity android:name=".view.CircleImageActivity"/>
+
     </application>
 
 </manifest>

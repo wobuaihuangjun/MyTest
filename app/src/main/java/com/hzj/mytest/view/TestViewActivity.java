@@ -1,6 +1,7 @@
 package com.hzj.mytest.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,12 +32,24 @@ public class TestViewActivity extends Activity {
 
     @OnClick(R.id.start_anim)
     public void onClick() {
-        if (startAnim.getText().equals("中止")) {
-            owLoadingView.stopAnim();
-            startAnim.setText("开始");
-        } else {
-            owLoadingView.startAnim();
-            startAnim.setText("中止");
+
+    }
+
+    @OnClick({R.id.start_anim, R.id.circle_image})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.start_anim:
+                if (startAnim.getText().equals("中止")) {
+                    owLoadingView.stopAnim();
+                    startAnim.setText("开始");
+                } else {
+                    owLoadingView.startAnim();
+                    startAnim.setText("中止");
+                }
+                break;
+            case R.id.circle_image:
+                startActivity(new Intent(this, CircleImageActivity.class));
+                break;
         }
     }
 }
