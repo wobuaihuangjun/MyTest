@@ -11,12 +11,10 @@
     <Button
         android:id="@+id/test_delay"
         style="@style/LabelButton"
-        android:layout_alignParentBottom="true"
         android:text="test_delay" />
 
     <Button
         android:id="@+id/test_just"
         style="@style/LabelButton"
-        android:layout_alignParentBottom="true"
         android:text="test_just" />
 </LinearLayout>
