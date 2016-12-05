@@ -1,4 +1,4 @@
-package com.hzj.mytest.view;
+package com.hzj.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

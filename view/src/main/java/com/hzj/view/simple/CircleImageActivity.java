@@ -1,14 +1,9 @@
-package com.hzj.mytest.view;
+package com.hzj.view.simple;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Button;
 
-import com.hzj.mytest.R;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.hzj.view.R;
 
 public class CircleImageActivity extends Activity {
 

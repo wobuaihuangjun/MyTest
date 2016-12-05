@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.hzj.mytest.R;
+import com.hzj.view.simple.CircleImageActivity;
+import com.hzj.view.loading.OWLoadingView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

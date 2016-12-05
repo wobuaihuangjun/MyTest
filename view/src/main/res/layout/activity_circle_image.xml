@@ -15,10 +15,10 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
                 android:scaleType="fitXY"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"
@@ -28,10 +28,10 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"
@@ -41,10 +41,10 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
                 android:scaleType="centerInside"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"
@@ -54,10 +54,10 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"
@@ -67,9 +67,9 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"
@@ -79,10 +79,10 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
                 android:scaleType="matrix"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"
@@ -92,10 +92,10 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
                 android:scaleType="center"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"
@@ -105,10 +105,10 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
                 android:scaleType="fitStart"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"
@@ -118,10 +118,10 @@
 
         <LinearLayout style="@style/circle_layout_style">
 
-            <com.hzj.mytest.view.CircleImageView
+            <com.hzj.view.CircleImageView
                 style="@style/circle_style"
                 android:scaleType="fitEnd"
-                android:src="@mipmap/lufei" />
+                android:src="@drawable/lufei" />
 
             <TextView
                 style="@style/cricle_text_style"

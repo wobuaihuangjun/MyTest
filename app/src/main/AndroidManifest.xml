@@ -21,8 +21,7 @@
 
         <activity android:name=".rxjava.TestRxjavaActivity" />
 
-        <activity android:name=".view.TestViewActivity"/>
-        <activity android:name=".view.CircleImageActivity"/>
+        <activity android:name=".view.TestViewActivity" />
 
     </application>
 

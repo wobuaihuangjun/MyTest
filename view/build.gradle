@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply from: '../config.gradle'
 
 android {
@@ -8,27 +8,18 @@ android {
     defaultConfig {
         minSdkVersion minSdkVer
         targetSdkVersion targetSdkVer
-        applicationId "com.hzj.mytest"
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
 
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-ext {
-    rxandroidVersion = "1.2.1"
-    rxjavaVersion = "1.1.10"
-
-    butterknifeVersion = "7.0.1"
-
-    eventbusVersion = "2.4.0"
 }
 
 dependencies {
@@ -38,13 +29,4 @@ dependencies {
     })
 
     testCompile 'junit:junit:4.12'
-
-    compile project(':view')
-
-    compile "io.reactivex:rxandroid:$rxandroidVersion"
-    compile "io.reactivex:rxjava:$rxjavaVersion"
-
-    compile "com.jakewharton:butterknife:$butterknifeVersion"
-
-    compile "de.greenrobot:eventbus:$eventbusVersion"
 }
