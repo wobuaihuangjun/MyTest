@@ -32,9 +32,11 @@ public class TestViewActivity extends Activity {
         owLoadingView = (OWLoadingView) findViewById(R.id.owloading);
     }
 
-    @OnClick(R.id.start_anim)
-    public void onClick() {
+    @Override
+    protected void onPause() {
+        super.onPause();
 
+        owLoadingView.stopAnim();
     }
 
     @OnClick({R.id.start_anim, R.id.circle_image})

@@ -68,6 +68,9 @@ public class OWLoadingView extends SurfaceView {
     //绘制图案
     private void draw() {
         Canvas canvas = surfaceHolder.lockCanvas();
+        if(canvas == null){
+
+        }
         paint.setXfermode(new PorterDuffXfermode(android.graphics.PorterDuff.Mode.CLEAR));
         canvas.drawPaint(paint);
         paint.setXfermode(new PorterDuffXfermode(android.graphics.PorterDuff.Mode.DST_OVER));

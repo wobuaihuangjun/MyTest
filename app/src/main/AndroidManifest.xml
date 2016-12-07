@@ -23,6 +23,8 @@
 
         <activity android:name=".view.TestViewActivity" />
 
+        <activity android:name=".thread.TestThreadActivity"/>
+
     </application>
 
 </manifest>
