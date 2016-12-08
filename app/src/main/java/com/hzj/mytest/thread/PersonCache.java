@@ -1,6 +1,7 @@
 package com.hzj.mytest.thread;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
@@ -44,19 +45,25 @@ public class PersonCache {
         return personCache;
     }
 
-    public Person getPerson(String watchId) {
+    public synchronized Person getPerson(String watchId) {
         if (TextUtils.isEmpty(watchId)) {
             return null;
         }
         Person person = cacheList.get(watchId);
+        if (person != null) {
+            Log.d(TAG, Thread.currentThread().getName() + " === get === " + person.toString());
+        } else {
+            Log.d(TAG, Thread.currentThread().getName() + " === get === " + null);
+        }
         return person;
     }
 
-    public void setPerson(Person person) {
+    public synchronized void setPerson(Person person) {
         if (person == null) {
             return;
         }
         cacheList.put(person.getId(), person);
+        Log.i(TAG, Thread.currentThread().getName() + " === set === " + person.toString());
     }
 
 }

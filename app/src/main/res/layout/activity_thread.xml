@@ -24,6 +24,11 @@
             style="@style/LabelButton"
             android:text="clear" />
 
+        <Button
+            android:id="@+id/map_test"
+            style="@style/LabelButton"
+            android:text="map_test" />
+
     </LinearLayout>
 
 

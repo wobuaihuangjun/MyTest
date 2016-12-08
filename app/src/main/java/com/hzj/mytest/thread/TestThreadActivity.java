@@ -8,6 +8,11 @@ import android.view.View;
 import com.hzj.mytest.R;
 import com.hzj.mytest.util.UUIDUtil;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -23,7 +28,7 @@ public class TestThreadActivity extends Activity {
 
     }
 
-    @OnClick({R.id.start, R.id.clear})
+    @OnClick({R.id.start, R.id.clear, R.id.map_test})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.start:
@@ -32,7 +37,43 @@ public class TestThreadActivity extends Activity {
             case R.id.clear:
                 PersonCache.getInstance().hasUpdatedData();
                 break;
+            case R.id.map_test:
+                map_test();
+                break;
         }
+    }
+
+    private void map_test() {
+        Map<String, Object> map1 = new HashMap<>();// 线程不安全
+        Map<String, Object> map2 = new Hashtable<>(); // 线程安全
+        Map<String, Object> map3 = new ConcurrentHashMap<>();// 线程安全
+
+        map1.put("key", "value");
+        map2.put("key", "value");
+        map3.put("key", "value");
+
+        int count = 100000;
+        long startTime = System.nanoTime();
+
+        for (int i = 0; i < count; i++) {
+            map1.get("key");
+        }
+        long endTime = System.nanoTime();
+        Log.i(TAG, " === map1 useTime === " + (endTime - startTime));
+
+        startTime = System.nanoTime();
+        for (int i = 0; i < count; i++) {
+            map2.get("key");
+        }
+        endTime = System.nanoTime();
+        Log.i(TAG, " === map2 useTime === " + (endTime - startTime));
+
+        startTime = System.nanoTime();
+        for (int i = 0; i < count; i++) {
+            map3.get("key");
+        }
+        endTime = System.nanoTime();
+        Log.i(TAG, " === map3 useTime === " + (endTime - startTime));
     }
 
     int count = 0;
@@ -64,7 +105,6 @@ public class TestThreadActivity extends Activity {
                     person.setId(ID);
                     person.setValue(count++);
                     PersonCache.getInstance().setPerson(person);
-                    Log.i(TAG, Thread.currentThread().getName() + " === set === " + person.toString());
                 }
             }).start();
         }
@@ -76,12 +116,6 @@ public class TestThreadActivity extends Activity {
                 @Override
                 public void run() {
                     Person person = PersonCache.getInstance().getPerson(ID);
-                    if (person != null) {
-                        Log.d(TAG, Thread.currentThread().getName() + " === get === " + person.toString());
-                    } else {
-                        Log.d(TAG, Thread.currentThread().getName() + " === get === " + null);
-                    }
-
                 }
             }).start();
         }
