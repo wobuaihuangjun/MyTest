@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -37,7 +38,7 @@ public class TestRxjavaActivity extends Activity {
     }
 
 
-    @OnClick({R.id.test_delay, R.id.test_just})
+    @OnClick({R.id.test_delay, R.id.test_just, R.id.test_takeFirst})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.test_delay:
@@ -46,9 +47,42 @@ public class TestRxjavaActivity extends Activity {
             case R.id.test_just:
                 testJust();
                 break;
+            case R.id.test_takeFirst:
+                testTakeFirst();
+                break;
             default:
                 break;
         }
+    }
+
+    private int count;
+
+    private void testTakeFirst() {
+        count++;
+        Observable
+                .just(count % 2 == 0)
+                .takeFirst(new Func1<Boolean, Boolean>() {
+                    @Override
+                    public Boolean call(Boolean aBoolean) {
+                        Log.d(TAG, "takeFirst ，" + aBoolean);
+                        return aBoolean;
+                    }
+                })
+                .map(new Func1<Boolean, Boolean>() {
+                    @Override
+                    public Boolean call(Boolean aBoolean) {
+                        Log.d(TAG, "map ，" + aBoolean);
+                        return aBoolean;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        Log.d(TAG, "Action1 ，" + aBoolean);
+                    }
+                });
     }
 
     private void testJust() {

@@ -17,4 +17,9 @@
         android:id="@+id/test_just"
         style="@style/LabelButton"
         android:text="test_just" />
+
+    <Button
+        android:id="@+id/test_takeFirst"
+        style="@style/LabelButton"
+        android:text="test_takeFirst" />
 </LinearLayout>
