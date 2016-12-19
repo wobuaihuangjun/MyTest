@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.hzj.mytest.R;
+import com.hzj.view.menu.SquareMenuActivity;
 import com.hzj.view.simple.CircleImageActivity;
 import com.hzj.view.loading.OWLoadingView;
 
@@ -39,7 +40,7 @@ public class TestViewActivity extends Activity {
         owLoadingView.stopAnim();
     }
 
-    @OnClick({R.id.start_anim, R.id.circle_image})
+    @OnClick({R.id.start_anim, R.id.circle_image, R.id.square_menu})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.start_anim:
@@ -53,6 +54,9 @@ public class TestViewActivity extends Activity {
                 break;
             case R.id.circle_image:
                 startActivity(new Intent(this, CircleImageActivity.class));
+                break;
+            case R.id.square_menu:
+                startActivity(new Intent(this, SquareMenuActivity.class));
                 break;
         }
     }

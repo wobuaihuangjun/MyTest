@@ -16,14 +16,19 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/start_anim"
+            android:id="@+id/square_menu"
             style="@style/LabelButton"
-            android:text="start_anim" />
+            android:text="square_menu" />
 
         <Button
             android:id="@+id/circle_image"
             style="@style/LabelButton"
             android:text="circle_image" />
+
+        <Button
+            android:id="@+id/start_anim"
+            style="@style/LabelButton"
+            android:text="start_anim" />
 
     </LinearLayout>
 
@@ -34,13 +39,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="13dp"
-        android:layout_marginTop="8dp" />
-
-    <com.hzj.view.loading.OWLoadingView
-        android:id="@+id/owloading"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerInParent="true"
         android:layout_marginTop="8dp" />
 
     <com.hzj.view.loading.SquareLoading
@@ -54,4 +52,10 @@
         app:xCount="4"
         app:yCount="3" />
 
+    <com.hzj.view.loading.OWLoadingView
+        android:id="@+id/owloading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="8dp" />
 </LinearLayout>
