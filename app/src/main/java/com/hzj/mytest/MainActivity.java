@@ -35,12 +35,19 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         ListView listView = (ListView) findViewById(R.id.lv_module_list);
 
-        listView.setAdapter(new DemoListAdapter(this, DEMOS));
+        DemoListAdapter adapter = new DemoListAdapter(this, DEMOS);
+        adapter.setOnItemClickListener(new DemoListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                onListItemClick(position);
+            }
+        });
+
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 onListItemClick(position);
-
             }
         });
     }

@@ -29,4 +29,8 @@
         <attr name="iconM3" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="RaiflatButton">
+        <attr name="flatten" format="boolean"/>
+    </declare-styleable>
+
 </resources>
