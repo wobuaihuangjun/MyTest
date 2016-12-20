@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">MyTest</string>
 
+    <string name="test_collection">test_collection</string>
     <string name="test_handler">test_handler</string>
     <string name="test_rxjava">test_rxjava</string>
     <string name="test_view">test_view</string>

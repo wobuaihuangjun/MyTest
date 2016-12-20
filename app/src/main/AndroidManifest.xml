@@ -17,6 +17,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".collection.TestCollectionActivity"/>
+
         <activity android:name=".handler.TestHandlerActivity" />
 
         <activity android:name=".rxjava.TestRxjavaActivity" />

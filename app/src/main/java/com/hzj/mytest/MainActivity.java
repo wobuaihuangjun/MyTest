@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.hzj.mytest.collection.TestCollectionActivity;
 import com.hzj.mytest.handler.DataListener;
 import com.hzj.mytest.handler.DataUpdateThreadMode;
 import com.hzj.mytest.handler.DealHandler;
@@ -21,6 +22,7 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity-hzjdemo：";
 
     private static final DemoInfo[] DEMOS = {
+            new DemoInfo(R.string.test_collection, TestCollectionActivity.class),
             new DemoInfo(R.string.test_handler, TestHandlerActivity.class),
             new DemoInfo(R.string.test_rxjava, TestRxjavaActivity.class),
             new DemoInfo(R.string.test_view, TestViewActivity.class),
