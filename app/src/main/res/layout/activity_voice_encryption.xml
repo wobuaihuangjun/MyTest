@@ -4,6 +4,12 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/playAudioTrackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AudioTrack播放" />
+
+    <Button
         android:id="@+id/playButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,4 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="停止" />
 </LinearLayout>

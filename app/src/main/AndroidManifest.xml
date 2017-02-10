@@ -32,6 +32,8 @@
         <activity android:name=".thread.TestThreadActivity" />
 
         <activity android:name=".voice.VoiceEncryptionActivity" />
+        <activity android:name=".voice.JLayerActivity"/>
+        <activity android:name=".voice.TestAudioTrackActivity"/>
 
     </application>
 

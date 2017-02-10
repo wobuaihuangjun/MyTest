@@ -1,12 +1,18 @@
 package com.hzj.mytest.voice;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import android.app.Activity;
+import android.media.AudioFormat;
+import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
@@ -14,11 +20,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hzj.mytest.R;
+
+import javazoom.jl.decoder.Bitstream;
+import javazoom.jl.decoder.Decoder;
+import javazoom.jl.decoder.Header;
+import javazoom.jl.decoder.SampleBuffer;
 
 public class VoiceEncryptionActivity extends Activity implements
         OnClickListener {
@@ -33,16 +43,17 @@ public class VoiceEncryptionActivity extends Activity implements
 
     private EditText editText;
 
+    private AudioTrack mAudioTrack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voice_encryption);
-        Button mPlayButton = (Button) findViewById(R.id.playButton);
-        mPlayButton.setOnClickListener(this);
-        Button mEncryptionButton = (Button) findViewById(R.id.encryptionButton);
-        mEncryptionButton.setOnClickListener(this);
-        Button mDecryptionButton = (Button) findViewById(R.id.decryptionButton);
-        mDecryptionButton.setOnClickListener(this);
+        findViewById(R.id.playButton).setOnClickListener(this);
+        findViewById(R.id.encryptionButton).setOnClickListener(this);
+        findViewById(R.id.decryptionButton).setOnClickListener(this);
+        findViewById(R.id.playAudioTrackButton).setOnClickListener(this);
+        findViewById(R.id.stop).setOnClickListener(this);
 
         editText = (EditText) findViewById(R.id.file_name);
     }
@@ -50,9 +61,19 @@ public class VoiceEncryptionActivity extends Activity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        stop();
+    }
+
+    private void stop() {
         if (mPlayer != null) {
             mPlayer.release();
             mPlayer = null;
+        }
+
+        if (mAudioTrack != null) {
+            mAudioTrack.stop();
+            mAudioTrack.release();
+            mAudioTrack = null;
         }
     }
 
@@ -75,6 +96,9 @@ public class VoiceEncryptionActivity extends Activity implements
             return;
         }
         switch (v.getId()) {
+            case R.id.playAudioTrackButton:
+                playByAudioTrack();
+                break;
             case R.id.playButton:
                 play();
                 break;
@@ -86,9 +110,91 @@ public class VoiceEncryptionActivity extends Activity implements
                 // 解密保存
                 decryption();
                 break;
+            case R.id.stop:
+                stop();
+                break;
             default:
                 break;
         }
+    }
+
+    Decoder mDecoder;
+
+    private void playByAudioTrack() {
+        isSuccess = true;
+        mDecoder = new Decoder();
+
+        final int sampleRate = 44100;
+        final int minBufferSize = AudioTrack.getMinBufferSize(sampleRate,
+                //MI3：CHANNEL_OUT_STEREO //[]AudioFormat.CHANNEL_OUT_STEREO
+                //CHANNEL_OUT_MONO影响不大，只要是new AudioTrack构建时选择AudioFormat.CHANNEL_OUT_STEREO即可
+                AudioFormat.CHANNEL_OUT_STEREO,
+                AudioFormat.ENCODING_PCM_16BIT);
+        mAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
+                sampleRate,
+                AudioFormat.CHANNEL_OUT_STEREO, // CHANNEL_OUT_STEREO 声音嘈杂 ，CHANNEL_OUT_DEFAULT，CHANNEL_IN_DEFAULT，也是有噪音
+                AudioFormat.ENCODING_PCM_16BIT,//AudioFormat.CHANNEL_CONFIGURATION_DEFAULT也是有声音
+                2 * minBufferSize,
+                AudioTrack.MODE_STREAM);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    fis = new FileInputStream(oldFile);
+                    byte[] oldByte = new byte[(int) oldFile.length()];
+                    fis.read(oldByte);
+
+                    // 解密
+                    byte[] newByte = AESUtils.decryptVoice(seed, oldByte);
+
+                    fis.close();
+                    InputStream in = new ByteArrayInputStream(newByte);
+                    Bitstream bitstream = new Bitstream(in);
+                    //大约需要14s，但是歌曲可以完整保存下来
+//                   final int READ_THRESHOLD = 2147483647;//我试着改动了，没有变化;
+                    //需要3s，但是音乐没有播放完就结束了
+                    final int READ_THRESHOLD = 1024;//我试着改动了，没有变化;
+                    int framesReaded = READ_THRESHOLD;
+
+                    ByteArrayOutputStream outStream = new ByteArrayOutputStream(1024 * 2);
+                    Header header;
+                    //先比较（y--）是否大于0，再让y=y-1，如果是--y>0,就是先让y=y-1,再比较现在的y值是否大于0
+                    for (; framesReaded-- > 0 && (header = bitstream.readFrame()) != null; ) {
+                        SampleBuffer sampleBuffer = (SampleBuffer) mDecoder.decodeFrame(header, bitstream);
+                        Log.e("header", String.valueOf(header.framesize));
+                        //方法1
+//                        short[] buffer = sampleBuffer.getBuffer();
+//                        mAudioTrack.write(buffer, 0, buffer.length);
+                        //方法2
+                        short[] buffer = sampleBuffer.getBuffer();
+                        for (short s : buffer) {
+                            //& 0xff 是为了保证补码一致  http://www.cnblogs.com/think-in-java/p/5527389.html
+                            outStream.write(s & 0xff);
+                            outStream.write((s >> 8) & 0xff);
+                        }
+                        bitstream.closeFrame();
+                    }
+                    byte[] Byte_JLayer = outStream.toByteArray();
+                    mAudioTrack.write(Byte_JLayer, 0, Byte_JLayer.length);
+
+                } catch (FileNotFoundException e) {
+                    isSuccess = false;
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    isSuccess = false;
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    isSuccess = false;
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        mAudioTrack.play();
+        mAudioTrack.setPlaybackPositionUpdateListener(null);
+        if (!isSuccess)
+            Toast.makeText(this, "播放失败", Toast.LENGTH_SHORT).show();
     }
 
     private void play() {
@@ -97,7 +203,7 @@ public class VoiceEncryptionActivity extends Activity implements
             mPlayer = null;
         }
         // mPlayer = MediaPlayer.create(this, R.raw.recording_old);
-
+        isSuccess = true;
         try {
             fis = new FileInputStream(oldFile);
             mPlayer = new MediaPlayer();
