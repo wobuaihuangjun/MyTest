@@ -3,19 +3,16 @@ package com.hzj.mytest;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.hzj.mytest.collection.TestCollectionActivity;
-import com.hzj.mytest.handler.DataListener;
-import com.hzj.mytest.handler.DataUpdateThreadMode;
-import com.hzj.mytest.handler.DealHandler;
 import com.hzj.mytest.handler.TestHandlerActivity;
 import com.hzj.mytest.rxjava.TestRxjavaActivity;
 import com.hzj.mytest.thread.TestThreadActivity;
 import com.hzj.mytest.view.TestViewActivity;
+import com.hzj.mytest.voice.VoiceEncryptionActivity;
 
 public class MainActivity extends Activity {
 
@@ -27,6 +24,7 @@ public class MainActivity extends Activity {
             new DemoInfo(R.string.test_rxjava, TestRxjavaActivity.class),
             new DemoInfo(R.string.test_view, TestViewActivity.class),
             new DemoInfo(R.string.test_thread, TestThreadActivity.class),
+            new DemoInfo(R.string.test_voice, VoiceEncryptionActivity.class),
     };
 
     @Override
