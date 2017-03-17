@@ -2,11 +2,11 @@ package com.hzj.mytest.thread;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.hzj.mytest.R;
 import com.hzj.mytest.util.UUIDUtil;
+import com.tencent.mars.xlog.Log;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -84,16 +84,25 @@ public class TestThreadActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                write();
+                for (int i = 0; i < 10; i++) {
+                    Log.d(TAG, " === test === ");
+                }
             }
         }).start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                read();
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                write();
+//            }
+//        }).start();
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                read();
+//            }
+//        }).start();
     }
 
     private void write() {

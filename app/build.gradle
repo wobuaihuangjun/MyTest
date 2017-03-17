@@ -6,7 +6,7 @@ android {
     buildToolsVersion buildToolsVer
 
     defaultConfig {
-        minSdkVersion minSdkVer
+        minSdkVersion 16
         targetSdkVersion targetSdkVer
         applicationId "com.hzj.mytest"
         versionCode 1
@@ -18,6 +18,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -42,5 +53,11 @@ dependencies {
     compile "io.reactivex:rxjava:$rxjavaVersion"
     compile "com.jakewharton:butterknife:$butterknifeVersion"
     compile "de.greenrobot:eventbus:$eventbusVersion"
+
+    compile 'com.fasterxml.jackson.core:jackson-core:2.7.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.2'
+
     compile files('libs/jl1.0.1.jar')
+
+//    compile 'com.tencent.mars:mars-core:1.1.4'
 }

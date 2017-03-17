@@ -4,7 +4,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import java.lang.ref.SoftReference;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantReadWriteLock;

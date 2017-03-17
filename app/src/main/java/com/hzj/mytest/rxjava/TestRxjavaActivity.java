@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;

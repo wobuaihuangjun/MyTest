@@ -12,9 +12,8 @@ import com.hzj.mytest.handler.TestHandlerActivity;
 import com.hzj.mytest.rxjava.TestRxjavaActivity;
 import com.hzj.mytest.thread.TestThreadActivity;
 import com.hzj.mytest.view.TestViewActivity;
-import com.hzj.mytest.voice.JLayerActivity;
-import com.hzj.mytest.voice.TestAudioTrackActivity;
 import com.hzj.mytest.voice.VoiceEncryptionActivity;
+import com.tencent.mars.xlog.Log;
 
 public class MainActivity extends Activity {
 
@@ -50,6 +49,13 @@ public class MainActivity extends Activity {
                 onListItemClick(position);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Log.appenderClose();
     }
 
     void onListItemClick(int index) {
