@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.CLASS)
 @Target({ElementType.FIELD})
-public @interface FiledMode {
+public @interface ClassAnnotation {
     public int value() default 1;
 }

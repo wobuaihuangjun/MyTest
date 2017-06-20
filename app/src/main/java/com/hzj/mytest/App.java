@@ -6,8 +6,6 @@ import android.os.Environment;
 import com.tencent.mars.xlog.Log;
 import com.tencent.mars.xlog.Xlog;
 
-import java.io.File;
-
 
 /**
  * Application
@@ -22,7 +20,7 @@ public class App extends Application {
         System.loadLibrary("stlport_shared");
         System.loadLibrary("marsxlog");
 
-        final String SDCARD = getExternalCacheDir().getAbsolutePath();
+        final String SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath();
         final String logPath = SDCARD + "/xtc/xlog";
 
         //init xlog
@@ -35,10 +33,5 @@ public class App extends Application {
         }
 
         Log.setLogImp(new Xlog());
-
-        File file = new File(logPath);
-
-        System.out.print("文件是否存在：" + file.exists());
-
     }
 }

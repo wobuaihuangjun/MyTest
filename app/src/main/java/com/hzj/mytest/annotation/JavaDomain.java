@@ -10,23 +10,21 @@ public class JavaDomain {
 
     public static void main(String[] args) {
 
-        Field[] fields = AnnotationDemo.class.getDeclaredFields();
-        Field field = null;
-        for (Field f : fields) {
-            if (f.getName().equals("itest")) {
-                field = f;
-                break;
-            }
-        }
-
-        Annotation[] annotations = field.getDeclaredAnnotations();
-
-        for (Annotation annotation : annotations) {
-            System.out.println(annotation.toString());
-            System.out.println(annotation.annotationType().getSimpleName());
-        }
+//        Field[] fields = AnnotationDemo.class.getDeclaredFields();
+//
+//        for (Field field : fields) {
+//            System.out.println(field.getName());
+//
+//            Annotation[] annotations = field.getDeclaredAnnotations();
+//
+//            for (Annotation annotation : annotations) {
+//                System.out.println(annotation.toString());
+//                System.out.println(annotation.annotationType().getSimpleName());
+//            }
+//
+//            System.out.println();
+//        }
 
     }
-
 
 }

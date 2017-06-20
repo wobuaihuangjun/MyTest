@@ -205,7 +205,7 @@ public class Log {
      * @param msg
      */
     public static void d(final String tag, final String msg) {
-        d(tag, msg, (Object[]) null);
+        d(tag, msg, new Throwable().getStackTrace(), (Object[]) null);
     }
 
     /**
@@ -255,13 +255,25 @@ public class Log {
         }
     }
 
-    public static void d(String tag, final String format, final Object... obj) {
+    public static void d(String tag, final String format, StackTraceElement[] sElements, final Object... obj) {
         if (logImp != null) {
             String log = obj == null ? format : String.format(format, obj);
             if (log == null) {
                 log = "";
             }
-            logImp.logD(tag, "", "", 0, Process.myPid(), Thread.currentThread().getId(), Looper.getMainLooper().getThread().getId(), log);
+
+            String className = sElements[1].getClassName();
+            String simpleClassName = className;
+            int i = className.lastIndexOf(".");
+            if (i + 1 < className.length() - 1) {
+                simpleClassName = className.substring(i + 1, className.length());
+            } else {
+                simpleClassName = className;
+            }
+            String methodName = sElements[1].getMethodName();
+            int lineNumber = sElements[1].getLineNumber();
+
+            logImp.logD(tag, simpleClassName, methodName, lineNumber, Process.myPid(), Thread.currentThread().getId(), Looper.getMainLooper().getThread().getId(), log);
         }
     }
 
