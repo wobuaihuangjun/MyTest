@@ -1,2 +1,0 @@
-# MyTest
-create projection test
