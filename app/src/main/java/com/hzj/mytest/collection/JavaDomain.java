@@ -7,7 +7,12 @@ public class JavaDomain {
 
     public static void main(String[] args) {
 
-        System.out.print(testPerson(new Person()));
+        Integer a = null;
+
+        Integer b = 2;
+        System.out.print(b.equals(a));
+
+//        System.out.print(testPerson(new Person()));
 
     }
 
