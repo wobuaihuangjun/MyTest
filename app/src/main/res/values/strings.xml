@@ -7,4 +7,7 @@
     <string name="test_view">test_view</string>
     <string name="test_thread">test_thread</string>
     <string name="test_voice">test_voice</string>
+    <string name="test_screen">test_screen</string>
+
+    <string name="screen_resolution">default</string>
 </resources>

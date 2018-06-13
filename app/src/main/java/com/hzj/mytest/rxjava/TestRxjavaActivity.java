@@ -1,7 +1,6 @@
 package com.hzj.mytest.rxjava;
 
 import android.app.Activity;
-import android.net.wifi.WifiConfiguration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.view.View;
 import com.hzj.mytest.R;
 import com.hzj.mytest.util.ThreadUtil;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
@@ -41,7 +41,7 @@ public class TestRxjavaActivity extends Activity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.test_delay:
-                testDelay();
+                testTaskArray();
                 break;
             case R.id.test_just:
                 testJust();
@@ -114,6 +114,65 @@ public class TestRxjavaActivity extends Activity {
                     @Override
                     public void call(Object o) {
                         Log.d(TAG, "end");
+                    }
+                });
+    }
+
+   private void testTaskArray(){
+       Log.w(TAG, "testTaskArray");
+       final Task task1 = new Task(1);
+       Task task2 = new Task(2);
+       Task task3 = new Task(3);
+       ArrayList<Task> tasks = new ArrayList<>();
+       tasks.add(task1);
+       tasks.add(task2);
+       tasks.add(task3);
+
+       Observable.from(tasks)
+               .concatMap(new Func1<Task, Observable<Task>>() {
+                   @Override
+                   public Observable<Task> call(Task task) {
+                       return Observable
+                               .just(task.doSomeThing());
+                   }
+               })
+               .subscribeOn(Schedulers.io())
+               .delay(3000, TimeUnit.MILLISECONDS)
+               .takeLast(1)
+               .subscribe(new Action1<Task>() {
+                   @Override
+                   public void call(Task task) {
+                       Log.w(TAG, "testTaskArray finish");
+                       // 执行完及时任务后，延迟3000ms再执行延迟任务
+                       startDelayTask();
+                   }
+               });
+   }
+
+    private void startDelayTask() {
+        Log.w(TAG, "startDelayTask");
+        Task task4 = new Task(4);
+        Task task5 = new Task(5);
+        Task task6 = new Task(6);
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.add(task4);
+        tasks.add(task5);
+        tasks.add(task6);
+        Observable.from(tasks)
+                .concatMap(new Func1<Task, Observable<Task>>() {
+                    @Override
+                    public Observable<Task> call(Task task) {
+                        return Observable
+                                .just(task.doSomeThing())
+                                .delay(1000, TimeUnit.MILLISECONDS);
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Task>() {
+                    @Override
+                    public void call(Task task) {
+                        Log.i(TAG, "task " + task.getInteger() +" is finish:" + ThreadUtil.isMainThread());
                     }
                 });
     }

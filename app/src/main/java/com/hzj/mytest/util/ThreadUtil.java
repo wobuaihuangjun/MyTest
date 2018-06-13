@@ -13,8 +13,12 @@ public class ThreadUtil {
     }
 
     public static void throwExceptionInMainThread() {
-        if (Looper.myLooper() == Looper.getMainLooper()) {
+        if (isMainThread()) {
             throw new IllegalThreadStateException("Illegal use the main thread !");
         }
+    }
+
+    public static boolean isMainThread(){
+        return Looper.myLooper() == Looper.getMainLooper();
     }
 }

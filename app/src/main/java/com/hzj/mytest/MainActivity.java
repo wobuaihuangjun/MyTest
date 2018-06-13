@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.hzj.mytest.collection.TestCollectionActivity;
 import com.hzj.mytest.handler.TestHandlerActivity;
 import com.hzj.mytest.rxjava.TestRxjavaActivity;
+import com.hzj.mytest.screensize.TestScreenAdapterActivity;
 import com.hzj.mytest.thread.TestThreadActivity;
 import com.hzj.mytest.view.TestViewActivity;
 import com.hzj.mytest.voice.VoiceEncryptionActivity;
@@ -26,6 +27,8 @@ public class MainActivity extends Activity {
             new DemoInfo(R.string.test_view, TestViewActivity.class),
             new DemoInfo(R.string.test_thread, TestThreadActivity.class),
             new DemoInfo(R.string.test_voice, VoiceEncryptionActivity.class),
+            new DemoInfo(R.string.test_screen, TestScreenAdapterActivity.class),
+
     };
 
     @Override

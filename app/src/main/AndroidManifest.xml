@@ -35,6 +35,7 @@
         <activity android:name=".voice.JLayerActivity"/>
         <activity android:name=".voice.TestAudioTrackActivity"/>
 
+        <activity android:name=".screensize.TestScreenAdapterActivity"/>
     </application>
 
 </manifest>
