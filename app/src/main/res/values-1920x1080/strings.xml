@@ -1,5 +1,5 @@
 <resources>
 
-    <string name="screen_resolution">1920x1080</string>
+    <string name="screen_resolution">adjust resolution：1920x1080</string>
 
 </resources>
