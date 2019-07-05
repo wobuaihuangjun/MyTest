@@ -17,9 +17,25 @@ public class JavaDomain {
 //        Integer b = 2;
 //        System.out.print(b.equals(a));
 
-        testMap();
+//        testMap();
 //        System.out.print(testPerson(new Person()));
 
+//        RequestManager requestManager = new RequestManager();
+//        requestManager.add("abc");
+
+        aa();
+    }
+
+    private static void aa() {
+        int a = 0;
+        while ((a = bb(a)) == 10) {
+            System.out.println("aaaaaaaaaaaaaaaaa");
+        }
+    }
+
+    private static int bb(int a) {
+        System.out.println("bb:" + a);
+        return a + 1;
     }
 
     public static String testPerson(Object object) {
