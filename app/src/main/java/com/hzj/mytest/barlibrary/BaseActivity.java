@@ -10,7 +10,7 @@ import com.hzj.mytest.R;
 /**
  * Activity基类
  */
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends Activity {
 
     private static final String TAG = "BaseActivity";
 
@@ -34,6 +34,7 @@ public class BaseActivity extends Activity {
     protected void initImmersionBar() {
         //在BaseActivity里初始化
         mImmersionBar = ImmersionBar.with(this)
+                .statusBarDarkFont(true)
                 .fitsSystemWindows(true);
 
         if (isImmersionBarWhite()) {
