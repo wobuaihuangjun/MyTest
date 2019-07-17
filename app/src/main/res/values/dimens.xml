@@ -4,5 +4,5 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="dimen_label_gap_20">20dp</dimen>
-    <dimen name="dimen_text_size_20">20sp</dimen>
+    <dimen name="dimen_text_size_18">18sp</dimen>
 </resources>
