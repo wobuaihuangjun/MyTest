@@ -6,7 +6,7 @@ ext {
     //最低兼容版本
     minSdkVer=16
     //测试过的版本
-    targetSdkVer=27
+    targetSdkVer=28
     //支持库的版本
     supportVer="27.0.2"
     //JDK版本
