@@ -1,12 +1,14 @@
 package com.hzj.mytest;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.hzj.mytest.barlibrary.BaseActivity;
 import com.hzj.mytest.collection.TestCollectionActivity;
+import com.hzj.mytest.device.DeviceActivity;
 import com.hzj.mytest.h5.TestWebViewActivity;
 import com.hzj.mytest.handler.TestHandlerActivity;
 import com.hzj.mytest.kotlin.TestKotlinActivity;
@@ -20,7 +22,7 @@ import com.hzj.mytest.voice.VoiceEncryptionActivity;
 import com.tencent.mars.xlog.Log;
 import com.tencent.mmkv.MMKV;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity-hzjdemo：";
 
@@ -36,6 +38,7 @@ public class MainActivity extends Activity {
             new DemoInfo(R.string.test_service, TestServiceActivity.class),
             new DemoInfo(R.string.test_store, TestStoreActivity.class),
             new DemoInfo(R.string.test_kotlin, TestKotlinActivity.class),
+            new DemoInfo(R.string.test_device, DeviceActivity.class),
 
     };
 

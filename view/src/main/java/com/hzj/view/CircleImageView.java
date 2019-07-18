@@ -124,7 +124,7 @@ public class CircleImageView extends ImageView {
     protected void onDraw(Canvas canvas) {
         syncDrawableIf();
         if (drawableSettled) {
-            int layerID = canvas.saveLayer(layerRect, layerPaint, Canvas.CLIP_SAVE_FLAG);//clear background
+            int layerID = canvas.saveLayer(layerRect, layerPaint);//clear background
             circlePath.reset();
             circlePath.addCircle(layerRect.centerX(), layerRect.centerY(), radius, Path.Direction.CCW);
             canvas.clipPath(circlePath);
