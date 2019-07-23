@@ -152,7 +152,8 @@ public class MacAddressUtil {
 
 
     /**
-     * 未开启WiFi的情况也能获取到mac地址
+     * 只要开启过WiFi的情况就能获取到mac地址
+     * Android Q 关闭WiFi的情况下重启手机后，获取到的mac地址不正确，开启WiFi后能正常获取到
      */
     public static String getMacByJavaAPI() {
         try {

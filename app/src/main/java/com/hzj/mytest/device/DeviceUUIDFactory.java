@@ -76,6 +76,9 @@ public class DeviceUUIDFactory {
         return macAddress;
     }
 
+    /**
+     * Android Q获取不到
+     */
     private static String getSerial() {
         String serialNumber = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
