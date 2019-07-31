@@ -26,6 +26,12 @@ public class DeviceUUIDFactory {
             return deviceUUID;
         }
 
+        if (Build.VERSION.SDK_INT >= 29) { //Android Q获取不到设备的macAddress和serial
+            deviceUUID = androidId + getDeviceInfo();
+            System.out.println("from android_id and device info. deviceUUID= " + deviceUUID);
+            return deviceUUID;
+        }
+
         String macAddress = getMacAddress(context);
         if (!TextUtils.isEmpty(macAddress)) {
             deviceUUID = androidId + macAddress;
@@ -108,4 +114,16 @@ public class DeviceUUIDFactory {
         return uuid.substring(0, 8) + uuid.substring(9, 13) + uuid.substring(14, 18) + uuid.substring(19, 23) + uuid.substring(24);
     }
 
+    private static String getDeviceInfo() {
+        return Build.BOARD + ":"//oppo6771_17197
+                + Build.BRAND + ":"//OPPO
+                + Build.CPU_ABI + ":"//arm64-v8a
+                + Build.DEVICE + ":"//PACM00
+                + Build.MANUFACTURER + ":"//OPPO
+                + Build.MODEL + ":"//PACM00
+                + Build.PRODUCT;//PACM00
+
+//        ::::::
+//        oppo6771_17197-OPPO-arm64-v8a-PACM00-OPPO-PACM00-PACM00
+    }
 }
