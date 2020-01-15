@@ -16,4 +16,6 @@
 
 
     <string name="screen_resolution">adjust resolution：default</string>
+
+    <string name="screen_width">screen_width：default</string>
 </resources>

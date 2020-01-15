@@ -11,6 +11,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -62,7 +64,18 @@
 
         <activity android:name=".service.TestServiceActivity" />
 
-        <service android:name=".service.MyService" />
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="MyService"
+            android:persistent="true"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="com.hzj.mytest.Service" />
+            </intent-filter>
+        </service>
+
         <service android:name=".service.ForegroundService" />
 
         <activity android:name=".stroe.TestStoreActivity" />

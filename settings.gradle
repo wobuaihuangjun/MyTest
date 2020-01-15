@@ -1,2 +1,2 @@
-include ':app', ':DesignPattern'
+include ':app', ':DesignPattern', ':okhttp'
 include ':view'
