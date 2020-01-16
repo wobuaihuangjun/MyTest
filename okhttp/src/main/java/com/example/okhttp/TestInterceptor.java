@@ -11,13 +11,9 @@ public class TestInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         System.out.println("TestInterceptor.intercept()");
-
         Request request = chain.request();
-        System.out.println("request.data:" + request.getData());
-
-        Response.Builder responseBuilder = new Response.Builder();
-        responseBuilder.code(1);
-        responseBuilder.data("Test Success");
-        return responseBuilder.build();
+        Response response = chain.proceed(request);
+        System.out.println("TestInterceptor.intercept(), request.data:" + request.getData());
+        return response;
     }
 }

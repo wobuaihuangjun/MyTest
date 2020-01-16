@@ -27,8 +27,10 @@ public class RealInterceptorChain implements Interceptor.Chain {
 
     @Override
     public Response proceed(Request request) throws IOException {
-        System.out.println("RealInterceptorChain.proceed(),index:" + index);
-        if (index >= interceptors.size()) throw new AssertionError();
+        System.out.println(this.toString() + ",RealInterceptorChain.proceed(),index:" + index);
+        if (index >= interceptors.size()){
+            throw new AssertionError();
+        }
 
         // Call the next interceptor in the chain.
         RealInterceptorChain next = new RealInterceptorChain(interceptors, index + 1, request);

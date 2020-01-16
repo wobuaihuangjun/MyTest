@@ -11,18 +11,24 @@ public class Response {
     private final Request request;
     private final int code;
     private final Object data;
+    private final String message;
 
     private Response(Builder builder) {
         this.request = builder.request;
         this.code = builder.code;
         this.data = builder.data;
+        this.message = builder.message;
     }
 
     public Request getRequest() {
         return request;
     }
 
-    public int getCode() {
+    public boolean isSuccessful() {
+        return code >= 200 && code < 300;
+    }
+
+    public int code() {
         return code;
     }
 
@@ -34,6 +40,7 @@ public class Response {
         private Request request;
         private int code;
         private Object data;
+        private String message;
 
         public Builder() {
             code = -1;
@@ -51,6 +58,11 @@ public class Response {
 
         public Builder data(Object data) {
             this.data = data;
+            return this;
+        }
+
+        public Builder message(String message) {
+            this.message = message;
             return this;
         }
 

@@ -1,7 +1,6 @@
 package com.example.okhttp;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +28,6 @@ public class OkHttpClient implements Call.Factory{
     }
 
     Dispatcher dispatcher() {
-        System.out.println("OkHttpClient.dispatcher()");
         return dispatcher;
     }
 

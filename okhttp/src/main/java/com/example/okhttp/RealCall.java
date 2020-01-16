@@ -11,9 +11,9 @@ import java.util.List;
  */
 public final class RealCall implements Call {
 
-    final OkHttpClient client;
+    private final OkHttpClient client;
 
-    final Request originalRequest;
+    private final Request originalRequest;
 
     private boolean executed;
 
@@ -92,7 +92,6 @@ public final class RealCall implements Call {
 
         @Override
         public void run() {
-            System.out.println("AsyncCall.run()");
             try {
                 Response response = getResponseWithInterceptorChain();
 
@@ -113,15 +112,13 @@ public final class RealCall implements Call {
         }
     }
 
-
-    protected Response getResponseWithInterceptorChain() throws Exception {
-        if (client.interceptors().size() == 0) {
-            System.out.println("AsyncCall.getResponseWithInterceptorChain()，interceptors size == 0");
-            throw new Exception("don't have only interceptor.");
-        }
-
-        List<Interceptor> interceptors = new ArrayList<Interceptor>();
+    private Response getResponseWithInterceptorChain() throws Exception {
+        List<Interceptor> interceptors = new ArrayList<>();
         interceptors.addAll(client.interceptors());
+
+        interceptors.add(new EndInterceptor());//如果是最后一个拦截器要有处理结果，不能再调用chain.proceed()。
+
+        System.out.println("AsyncCall.getResponseWithInterceptorChain()，interceptors.size:" + interceptors.size());
 
         Interceptor.Chain chain = new RealInterceptorChain(interceptors, 0, originalRequest);
         return chain.proceed(originalRequest);

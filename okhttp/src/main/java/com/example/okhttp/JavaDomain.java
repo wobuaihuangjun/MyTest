@@ -17,6 +17,7 @@ public class JavaDomain {
         okHttpClientBuilder.timeout(10000, TimeUnit.MILLISECONDS);
         OkHttpClient okHttpClient = okHttpClientBuilder.build();
         okHttpClient.addInterceptor(new TestInterceptor());
+        okHttpClient.addInterceptor(new ErrorInterceptor());
 
         Request.Builder requestBuilder = new Request.Builder();
         requestBuilder.data("Test");
@@ -26,12 +27,12 @@ public class JavaDomain {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, Exception e) {
-                System.out.println("onFailure");
+                System.out.println("-----------onFailure----------: " + e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response){
-                System.out.println("onResponse");
+                System.out.println("-----------onResponse----------: " + response.getData());
             }
         });
 
